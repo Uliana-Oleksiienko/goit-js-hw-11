@@ -1,6 +1,5 @@
 import { getImagesByQuery } from './js/pixabay-api.js';
 import {
-  initLightbox,
   createGallery,
   clearGallery,
   showLoader,
@@ -14,8 +13,6 @@ import iziToast from 'izitoast';
 
 const form = document.querySelector('.form');
 const input = document.querySelector('[name="search-text"]');
-
-initLightbox();
 
 form.addEventListener('submit', e => {
   e.preventDefault();

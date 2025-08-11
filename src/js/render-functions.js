@@ -1,16 +1,19 @@
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryEl = document.getElementById('gallery');
 const loaderEl = document.querySelector('.loader');
 
 let lightbox = null;
 
-export function initLightbox() {
+function initLightbox() {
   if (!lightbox) {
     lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
       captionDelay: 250,
     });
+  } else {
+    lightbox.refresh();
   }
 }
 
@@ -47,12 +50,15 @@ export function createGallery(images) {
     .join('');
 
   galleryEl.insertAdjacentHTML('beforeend', markup);
-
-  if (lightbox) lightbox.refresh();
+  initLightbox();
 }
 
 export function clearGallery() {
   galleryEl.innerHTML = '';
+  if (lightbox) {
+    lightbox.destroy();
+    lightbox = null;
+  }
 }
 
 export function showLoader() {
