@@ -7,14 +7,10 @@ const loaderEl = document.querySelector('.loader');
 let lightbox = null;
 
 function initLightbox() {
-  if (!lightbox) {
-    lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
-  } else {
-    lightbox.refresh();
-  }
+  lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 }
 
 export function createGallery(images) {
@@ -30,12 +26,10 @@ export function createGallery(images) {
         views,
         comments,
         downloads,
-      }) => {
-        const alt = tags || 'photo';
-        return `
+      }) => `
         <li class="card">
           <a href="${largeImageURL}">
-            <img class="card-img" src="${webformatURL}" alt="${alt}" loading="lazy" />
+            <img class="card-img" src="${webformatURL}" alt="${tags || 'photo'}" loading="lazy" />
           </a>
           <ul class="meta">
             <li><span class="label">Likes</span> ${likes}</li>
@@ -44,15 +38,13 @@ export function createGallery(images) {
             <li><span class="label">Downloads</span> ${downloads}</li>
           </ul>
         </li>
-      `;
-      }
+      `
     )
     .join('');
 
-  galleryEl.insertAdjacentHTML('beforeend', markup);
+  galleryEl.innerHTML = markup;
   initLightbox();
 }
-
 export function clearGallery() {
   galleryEl.innerHTML = '';
   if (lightbox) {
@@ -60,11 +52,9 @@ export function clearGallery() {
     lightbox = null;
   }
 }
-
 export function showLoader() {
   loaderEl.classList.remove('hidden');
 }
-
 export function hideLoader() {
   loaderEl.classList.add('hidden');
 }
