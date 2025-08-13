@@ -78,7 +78,6 @@
     border-radius: 50%;
     animation: rotation 1s linear infinite;
     z-index: 1000;
-    display: none;
 }
 
 .loader.visible {
